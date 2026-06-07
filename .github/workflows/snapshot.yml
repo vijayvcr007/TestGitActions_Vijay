@@ -25,5 +25,5 @@ jobs:
       - name: Upload snapshot artifact
         uses: actions/upload-artifact@v4
         with:
-          name: repo-snapshot
+          name: repo-snapshot.${{ github.run_number }}
           path: snapshot/repo.tar.gz
