@@ -1,1 +1,1 @@
-This is a test file to be checked into github
+This is a test file to be checked into github. Also a new file will be added later.
