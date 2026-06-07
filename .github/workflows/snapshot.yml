@@ -1,0 +1,29 @@
+name: Snapshot
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  create_snapshot:
+    name: Create repository snapshot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create archive of repository
+        run: |
+          mkdir -p snapshot
+          tar --exclude='.git' --exclude='node_modules' -czf snapshot/repo.tar.gz .
+
+      - name: Upload snapshot artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo-snapshot
+          path: snapshot/repo.tar.gz
